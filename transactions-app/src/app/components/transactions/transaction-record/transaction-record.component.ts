@@ -4,7 +4,7 @@ import { CurrencyPipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { CurrencyCode } from '../../../../shared/constants';
 @Component({
-  selector: 'transaction-record',
+  selector: 'app-transaction-record',
   templateUrl: './transaction-record.component.html',
   styleUrls: ['./transaction-record.component.scss'],
   standalone: true,

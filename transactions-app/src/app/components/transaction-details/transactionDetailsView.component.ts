@@ -13,7 +13,7 @@ function isLocalTransaction(
 }
 
 @Component({
-  selector: 'transaction-details-view',
+  selector: 'app-transaction-details-view',
   imports: [NgIf, CardComponent, CurrencyPipe, DatePipe],
   templateUrl: './transactionDetailsView.component.html',
   styleUrls: ['./transactionDetailsView.component.scss'],

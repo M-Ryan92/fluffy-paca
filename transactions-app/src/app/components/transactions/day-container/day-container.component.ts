@@ -5,13 +5,13 @@ import { Transaction } from '../../../../shared/types';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'transactions-day-container',
+  selector: 'app-transactions-day-container',
   imports: [TransactionRecordComponent, DayMonthFormatPipe, CommonModule],
   template: `
     <div class="day-container">
       <span class="rounded-day-icon">{{ dayId | dayMonthFormat }}</span>
       <div class="transactions-container">
-        <transaction-record
+        <app-transaction-record
           *ngFor="let transaction of transactions; let i = index"
           [transaction]="transaction"
           [day]="dayId"

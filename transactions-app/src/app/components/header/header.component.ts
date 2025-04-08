@@ -11,9 +11,9 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   @Input() title!: string;
-  @Input() showNav: boolean = true;
+  @Input() showNav = true;
 
-  isMenuOpen: boolean = false;
+  isMenuOpen = false;
 
   navItems = [
     { label: 'Transactions', route: '/transactions', icon: 'receipt' },

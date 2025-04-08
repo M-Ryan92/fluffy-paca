@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'transactions-month-container',
+  selector: 'app-transactions-month-container',
   imports: [],
   template: `
     <div class="month-header">

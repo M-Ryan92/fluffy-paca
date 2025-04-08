@@ -1,4 +1,9 @@
-<div class="transaction-row" (click)="onTransactionClick()" [ngClass]="{'first': isFirst, 'last': isLast}">
+<div class="transaction-row" 
+     (click)="onTransactionClick()" 
+     (keydown.enter)="onTransactionClick()"
+     tabindex="0"
+     role="button"
+     [ngClass]="{'first': isFirst, 'last': isLast}">
   <div class="transaction-party">
     {{ otherPartyName() }}
   </div>

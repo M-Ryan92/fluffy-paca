@@ -4,24 +4,24 @@
   </div>
 
 
-  <card>
+  <app-card>
     <div class="main-details">
       <h2>{{ amount | currency: localCurrencyCode }}</h2>
       <p>{{ date | date:'dd/MM/yyyy HH:mm:ss' }}</p>
     </div>
-  </card>
+  </app-card>
 
-  <card label="description">
+  <app-card label="description">
     <p>{{ description }}</p>
-  </card>
+  </app-card>
 
-  <card label="currency rate" *ngIf="isForeignCurrency === true">
+  <app-card label="currency rate" *ngIf="isForeignCurrency === true">
     <p>{{ currencyRate }}</p>
-  </card>
+  </app-card>
 
-  <card label="original amount" *ngIf="isForeignCurrency === true">
+  <app-card label="original amount" *ngIf="isForeignCurrency === true">
     <p>{{ originalAmount | currency: currencyCode }}</p>
-  </card>
+  </app-card>
 </div>-
 
 <ng-template #notFound>

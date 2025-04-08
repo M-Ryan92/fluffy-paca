@@ -5,11 +5,9 @@ import { TransactionService } from '../../services/transaction.service';
 import { Component } from '@angular/core';
 import { MonthContainerComponent } from './month-container/month-container.component';
 import { DayContainerComponent } from './day-container/day-container.component';
-type groupedTransactions = {
-  [month: string]: Day[];
-};
+type groupedTransactions = Record<string, Day[]>;
 @Component({
-  selector: 'transactions-view',
+  selector: 'app-transactions-view',
   imports: [CommonModule, MonthContainerComponent, DayContainerComponent],
   templateUrl: './transactionsView.component.html',
   styleUrls: ['./transactionsView.component.scss'],

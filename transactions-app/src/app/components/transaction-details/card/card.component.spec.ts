@@ -5,9 +5,9 @@ import { NgIf } from '@angular/common';
 
 @Component({
   template: `
-    <card>
+    <app-card>
       <div>Test Content</div>
-    </card>
+    </app-card>
   `,
   standalone: true,
   imports: [CardComponent],
