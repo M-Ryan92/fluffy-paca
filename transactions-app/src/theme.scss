@@ -1,0 +1,44 @@
+// Transactions App Theme
+
+// Primary Colors
+$primary: #1d3a71;    
+$secondary: #4a90e2;  
+
+// Transaction Colors
+$positive: #2e7d324d;   // Green for deposits/incoming
+$negative: #c628286b;   // Red for withdrawals/outgoing
+
+// Neutral Colors
+$light: #d7edf7; // #e0e0e0;      // Light background
+$dark: #212121;       // Dark text
+$white: #ffffff;      // White surface
+$border: #e0e0e0;     // Border color
+
+// Status Colors
+$info: #0288d1;       // Information
+$warning: #ffa000;    // Warning
+$error: #d32f2f;      // Error
+
+// Typography
+$font-family: 'Roboto', sans-serif;
+$font-size-base: 1rem;
+$font-size-medium: 1.5rem;
+$font-size-large: 2.5rem;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-small: 0.5rem;
+$spacing-medium: 1rem;
+$spacing-large: 1.5rem;
+
+// Border Radius
+$border-radius: 0.25rem;
+
+// Shadow
+$shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+
+$default-max-width: 75rem;
+$max-width-tablet: 48rem;
+$max-width-mobile: 30rem;

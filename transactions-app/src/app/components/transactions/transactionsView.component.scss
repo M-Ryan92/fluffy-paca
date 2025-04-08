@@ -1,0 +1,6 @@
+@use '../../../theme' as *;
+@use '../../app.component.scss' as *;
+
+.rounded-icon {
+  @include rounded-icon(4rem);
+}

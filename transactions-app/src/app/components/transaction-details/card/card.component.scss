@@ -1,0 +1,29 @@
+@use '../../../../theme.scss' as *;
+
+.details-card {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: $spacing-medium;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.card-label {
+  color: $primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  padding: $spacing-medium $spacing-medium $spacing-small;
+  border-bottom: 1px solid $border;
+}
+
+.card-content {
+  padding: 0 $spacing-medium;
+  color: $dark;
+  font-size: 1rem;
+  line-height: 1.5;
+}

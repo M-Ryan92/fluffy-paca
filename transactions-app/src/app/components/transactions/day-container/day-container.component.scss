@@ -1,0 +1,28 @@
+@use '../../../../theme.scss' as *;
+@use '../../../app.component.scss' as *;
+
+.rounded-day-icon {
+  @include rounded-icon(4rem);
+  margin-bottom: $spacing-medium;
+  position: relative;
+  z-index: 1;
+}
+
+.day-container {
+  padding: 0.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.transactions-container {
+  :first-child {
+    .transaction-row {
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+  }
+  :last-child {
+    .transaction-row {
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+  }
+}

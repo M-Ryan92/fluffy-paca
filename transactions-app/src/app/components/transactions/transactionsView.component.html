@@ -1,0 +1,14 @@
+<div class="content-container">
+  <div class="content-header">
+    <h1 class="content-header-title">Overview</h1>
+  </div>
+  <div>
+    <div *ngFor="let transaction of transactions; let i = index">
+      <transactions-month-container [month]="transaction.month">
+        <div *ngFor="let day of transaction.days; let i = index">
+          <transactions-day-container [dayId]="day.id" [transactions]="day.transactions"></transactions-day-container>
+        </div>
+      </transactions-month-container>
+    </div>
+  </div>
+</div> 

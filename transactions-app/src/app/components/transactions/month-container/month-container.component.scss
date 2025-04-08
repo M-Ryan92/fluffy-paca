@@ -1,0 +1,27 @@
+@use '../../../../theme.scss' as *;
+@use './../../../app.component.scss' as *;
+
+.month-header {
+  background: $secondary;
+  padding: 0.5rem 1rem;
+}
+
+.month-transactions {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 2.875rem;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: $secondary;
+    z-index: 0;
+  }
+  padding: 1rem;
+}
+
+.rounded-month-icon {
+  @include rounded-icon(4rem);
+}

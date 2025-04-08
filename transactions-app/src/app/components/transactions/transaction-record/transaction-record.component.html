@@ -1,0 +1,10 @@
+<div class="transaction-row" (click)="onTransactionClick()" [ngClass]="{'first': isFirst, 'last': isLast}">
+  <div class="transaction-party">
+    {{ otherPartyName() }}
+  </div>
+  <div class="transaction-amount">
+    <span class="transaction-icon " [ngClass]="{'positive': transaction.amount > 0, '': transaction.amount < 0}">
+      {{ amount() }}
+    </span>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+@use '../../../../theme.scss' as *;
+
+$separator: 2px solid $light;
+
+.transaction-row {
+  &.first {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom: $separator ;
+  }
+  &.last {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border: none;
+  }
+  border-bottom: $separator;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #ffffff;
+
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+  }
+
+  .transaction-icon {
+    padding: $spacing-small $spacing-medium;
+    border-radius: 0.25rem;
+    font-size: $font-size-medium;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    &.positive {
+      background-color: $positive
+    }
+  }
+
+  .transaction-party {
+    flex: 1;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .transaction-amount {
+    flex: 1 0 7.5rem;
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+}

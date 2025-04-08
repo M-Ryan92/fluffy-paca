@@ -1,0 +1,49 @@
+@use '../../../theme.scss' as *;
+
+.main-details {
+  h2 {
+    text-align: center;
+    font-size: $font-size-large;
+    color: $primary;
+    margin: $spacing-medium $spacing-medium 0 $spacing-medium;
+  }
+
+  p {
+    text-align: center;
+    font-size: $font-size-base;
+    color: $dark;
+    margin: $spacing-small 0;
+  }
+}
+
+.details-meta {
+  display: flex;
+  gap: $spacing-large;
+  margin-top: $spacing-medium;
+  
+  p {
+    margin: 0;
+    color: $secondary;
+  }
+  
+  strong {
+    color: $dark;
+  }
+}
+
+.details-card {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  padding: $spacing-large;
+  
+  h2 {
+    margin: 0 0 $spacing-medium 0;
+    color: $dark;
+  }
+}
+
+.details-info {
+  color: $dark;
+  line-height: 1.5;
+} 
