@@ -23,6 +23,8 @@ export class TransactionDetailsViewComponent implements OnInit {
   id!: string;
 
   description!: string;
+  otherPartyName!: string;
+  otherPartyIban!: string | undefined;
   amount!: number;
   originalAmount!: number;
   date!: string;
@@ -48,6 +50,8 @@ export class TransactionDetailsViewComponent implements OnInit {
       .subscribe((transaction) => {
         this.transaction = transaction;
         this.description = transaction.description;
+        this.otherPartyName = transaction.otherParty?.name || 'ATM';
+        this.otherPartyIban = transaction.otherParty?.iban;
         this.amount = transaction.amount;
         this.date = transaction.timestamp;
         this.currencyCode = transaction.currencyCode;

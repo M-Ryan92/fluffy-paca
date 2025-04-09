@@ -19,6 +19,22 @@
     <p>{{ currencyRate }}</p>
   </app-card>
 
+  <app-card label="other party">
+    <div class="details-info">
+      <strong>Name:</strong>
+      <span>{{ otherPartyName }}</span>
+    </div>
+
+    <div class="details-info" *ngIf="otherPartyIban !== undefined">
+      <strong>Iban:</strong>
+      <span>{{ otherPartyIban }}</span>
+    </div>
+  </app-card>
+
+  <app-card label="currency code" *ngIf="isForeignCurrency === true">
+    <p>{{ currencyCode }}</p>
+  </app-card>
+
   <app-card label="original amount" *ngIf="isForeignCurrency === true">
     <p>{{ originalAmount | currency: currencyCode }}</p>
   </app-card>
