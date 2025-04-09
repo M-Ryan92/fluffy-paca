@@ -48,7 +48,7 @@ describe('TransactionRecordComponent', () => {
     expect(partyElement.textContent.trim()).toBe('Test Person');
   });
 
-  it('should display "My Account" when other party is not available', () => {
+  it('should display "ATM" when other party is not available', () => {
     fixture = TestBed.createComponent(TransactionRecordComponent);
     component = fixture.componentInstance;
     component.transaction = { ...mockTransaction, otherParty: undefined };
@@ -56,11 +56,11 @@ describe('TransactionRecordComponent', () => {
 
     const expectedName = component.otherPartyName();
     console.log({ expectedName });
-    expect(expectedName).toBe('My Account');
+    expect(expectedName).toBe('ATM');
 
     const partyElement =
       fixture.nativeElement.querySelector('.transaction-party');
-    expect(partyElement.textContent.trim()).toBe('My Account');
+    expect(partyElement.textContent.trim()).toBe('ATM');
   });
 
   it('should apply positive class when amount is positive', () => {

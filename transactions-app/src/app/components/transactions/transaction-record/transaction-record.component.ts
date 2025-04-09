@@ -16,7 +16,7 @@ export class TransactionRecordComponent {
 
   public otherPartyName = computed(() => {
     const otherParty = this.transaction.otherParty;
-    return otherParty ? otherParty.name : 'My Account';
+    return otherParty ? otherParty.name : 'ATM';
   });
 
   public amount = computed(() => {
