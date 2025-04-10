@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MonthContainerComponent } from './month-container.component';
+import { MonthSectionComponent } from './month-section.component';
 import { By } from '@angular/platform-browser';
 
 describe('MonthContainerComponent', () => {
-  let component: MonthContainerComponent;
-  let fixture: ComponentFixture<MonthContainerComponent>;
+  let component: MonthSectionComponent;
+  let fixture: ComponentFixture<MonthSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MonthContainerComponent],
+      imports: [MonthSectionComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MonthContainerComponent);
+    fixture = TestBed.createComponent(MonthSectionComponent);
     component = fixture.componentInstance;
     component.month = new Date('2023-01-15');
     fixture.detectChanges();

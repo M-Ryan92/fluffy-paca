@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-transactions-month-container',
+  selector: 'app-transactions-month-section',
   imports: [],
-  templateUrl: 'month-container.component.html',
-  styleUrl: './month-container.component.scss',
+  templateUrl: 'month-section.component.html',
+  styleUrl: './month-section.component.scss',
 })
-export class MonthContainerComponent {
+export class MonthSectionComponent {
   @Input() month!: Date;
 
   public getShortMonth(): string {

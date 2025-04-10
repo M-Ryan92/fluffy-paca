@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Day } from '../../../shared/types';
 import { TransactionService } from '../../services/transaction.service';
 import { Component } from '@angular/core';
-import { MonthContainerComponent } from './month-container/month-container.component';
-import { DayContainerComponent } from './day-container/day-container.component';
+import { MonthSectionComponent } from './month-section/month-section.component';
+import { DaySectionComponent } from './day-section/day-section.component';
 type groupedTransactions = Record<string, Day[]>;
 @Component({
   selector: 'app-transactions-view',
-  imports: [CommonModule, MonthContainerComponent, DayContainerComponent],
+  imports: [CommonModule, MonthSectionComponent, DaySectionComponent],
   templateUrl: './transactionsView.component.html',
   styleUrls: ['./transactionsView.component.scss'],
 })

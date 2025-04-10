@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DayContainerComponent } from './day-container.component';
+import { DaySectionComponent } from './day-section.component';
 import { TransactionRecordComponent } from '../transaction-record/transaction-record.component';
 import { DayMonthFormatPipe } from './pipe/day-month-format.pipe';
 import { Transaction } from '../../../../shared/types';
@@ -7,8 +7,8 @@ import { CurrencyCode } from '../../../../shared/constants';
 import { By } from '@angular/platform-browser';
 
 describe('DayContainerComponent', () => {
-  let component: DayContainerComponent;
-  let fixture: ComponentFixture<DayContainerComponent>;
+  let component: DaySectionComponent;
+  let fixture: ComponentFixture<DaySectionComponent>;
 
   const mockTransactions: Transaction[] = [
     {
@@ -38,13 +38,13 @@ describe('DayContainerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DayContainerComponent,
+        DaySectionComponent,
         TransactionRecordComponent,
         DayMonthFormatPipe,
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DayContainerComponent);
+    fixture = TestBed.createComponent(DaySectionComponent);
     component = fixture.componentInstance;
     component.dayId = '2023-01-01';
     component.transactions = mockTransactions;

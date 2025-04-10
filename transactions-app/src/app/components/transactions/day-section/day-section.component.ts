@@ -5,12 +5,12 @@ import { Transaction } from '../../../../shared/types';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-transactions-day-container',
+  selector: 'app-transactions-day-section',
   imports: [TransactionRecordComponent, DayMonthFormatPipe, CommonModule],
-  templateUrl: './day-container.component.html',
-  styleUrl: './day-container.component.scss',
+  templateUrl: './day-section.component.html',
+  styleUrl: './day-section.component.scss',
 })
-export class DayContainerComponent {
+export class DaySectionComponent {
   @Input() dayId!: string;
   @Input() transactions!: Transaction[];
 }

@@ -4,11 +4,11 @@
   </div>
   <div>
     <div *ngFor="let transaction of transactions; let i = index">
-      <app-transactions-month-container [month]="transaction.month">
+      <app-transactions-month-section [month]="transaction.month">
         <div *ngFor="let day of transaction.days; let i = index">
-          <app-transactions-day-container [dayId]="day.id" [transactions]="day.transactions"></app-transactions-day-container>
+          <app-transactions-day-section [dayId]="day.id" [transactions]="day.transactions"></app-transactions-day-section>
         </div>
-      </app-transactions-month-container>
+      </app-transactions-month-section>
     </div>
   </div>
 </div> 
