@@ -8,7 +8,7 @@ export class DayMonthFormatPipe implements PipeTransform {
   transform(value: string): string {
     const date = new Date(value);
 
-    const monthLong = date.toLocaleString('default', {
+    const monthShort = date.toLocaleString('default', {
       month: 'short',
     });
 
@@ -16,6 +16,6 @@ export class DayMonthFormatPipe implements PipeTransform {
       day: '2-digit',
     });
 
-    return `${dayDigit} ${monthLong}`;
+    return `${dayDigit} ${monthShort}`;
   }
 }

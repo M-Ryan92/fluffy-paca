@@ -13,11 +13,6 @@ export const routes: Routes = [
     component: TransactionsViewComponent,
   },
   {
-    path: '1',
-    redirectTo: '/transaction-details/2023-01-01/1',
-    pathMatch: 'full',
-  },
-  {
     path: 'transaction-details/:day/:id',
     component: TransactionDetailsViewComponent,
   },

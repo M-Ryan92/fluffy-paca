@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 import { Day } from '../../../shared/types';
 import { TransactionService } from '../../services/transaction.service';
 import { Component } from '@angular/core';
@@ -18,10 +17,7 @@ export class TransactionsViewComponent {
 
   transactions: { month: Date; days: Day[] }[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private transactionService: TransactionService
-  ) {
+  constructor(private transactionService: TransactionService) {
     this.transactionService.getTransactions().subscribe({
       next: (transactions) => {
         const grouped = transactions.days.reduce((acc, day) => {
