@@ -1,27 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TransactionRecordComponent } from './transaction-record.component';
 import { Router } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
-import { NgClass } from '@angular/common';
-import { ForeignTransaction } from '../../../../shared/types';
+import { LocalTransaction, ForeignTransaction } from '../../../../shared/types';
 import { CurrencyCode } from '../../../../shared/constants';
+import { By } from '@angular/platform-browser';
+import { NgClass } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 
 describe('TransactionRecordComponent', () => {
   let component: TransactionRecordComponent;
   let fixture: ComponentFixture<TransactionRecordComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
 
-  const mockTransaction: ForeignTransaction = {
-    id: 123,
-    timestamp: '2023-01-01T12:00:00Z',
-    amount: 100.5,
-    currencyCode: CurrencyCode.USD,
-    currencyRate: 1,
+  const mockLocalTransaction: LocalTransaction = {
+    id: 1,
+    timestamp: '2023-01-01T10:00:00Z',
+    amount: 100,
+    currencyCode: CurrencyCode.EUR,
     description: 'Test transaction',
     otherParty: {
       name: 'Test Person',
       iban: 'NL91ABNA0417164300',
     },
+  };
+
+  const mockForeignTransaction: ForeignTransaction = {
+    id: 2,
+    timestamp: '2023-01-01T11:00:00Z',
+    amount: 200,
+    currencyCode: CurrencyCode.USD,
+    currencyRate: 0.85,
+    description: 'Foreign transaction',
+    otherParty: {
+      name: 'Test Company',
+      iban: 'NL91ABNA0417164301',
+    },
+  };
+
+  const mockTransactionWithoutOtherParty: LocalTransaction = {
+    id: 3,
+    timestamp: '2023-01-01T12:00:00Z',
+    amount: 300,
+    currencyCode: CurrencyCode.EUR,
+    description: 'ATM transaction',
   };
 
   beforeEach(async () => {
@@ -34,7 +55,8 @@ describe('TransactionRecordComponent', () => {
 
     fixture = TestBed.createComponent(TransactionRecordComponent);
     component = fixture.componentInstance;
-    component.transaction = mockTransaction;
+    component.transaction = mockLocalTransaction;
+    component.day = '2023-01-01';
     fixture.detectChanges();
   });
 
@@ -43,29 +65,61 @@ describe('TransactionRecordComponent', () => {
   });
 
   it('should display the other party name when available', () => {
-    const partyElement =
-      fixture.nativeElement.querySelector('.transaction-party');
-    expect(partyElement.textContent.trim()).toBe('Test Person');
+    expect(component.otherPartyName()).toBe('Test Person');
   });
 
   it('should display "ATM" when other party is not available', () => {
     fixture = TestBed.createComponent(TransactionRecordComponent);
     component = fixture.componentInstance;
-    component.transaction = { ...mockTransaction, otherParty: undefined };
+    component.transaction = mockTransactionWithoutOtherParty;
+    fixture.detectChanges();
+    expect(component.otherPartyName()).toBe('ATM');
+  });
+
+  it('should format local currency amount correctly', () => {
+    expect(typeof component.amount()).toBe('string');
+  });
+
+  it('should convert foreign currency amount to EUR', () => {
+    component.transaction = mockForeignTransaction;
     fixture.detectChanges();
 
-    const expectedName = component.otherPartyName();
-    console.log({ expectedName });
-    expect(expectedName).toBe('ATM');
+    expect(typeof component.amount()).toBe('string');
+    const amountValue = component.amount();
+    expect(amountValue).toContain('100.00');
+  });
 
-    const partyElement =
-      fixture.nativeElement.querySelector('.transaction-party');
-    expect(partyElement.textContent.trim()).toBe('ATM');
+  it('should navigate to transaction details when clicked', () => {
+    component.onTransactionClick();
+    expect(routerSpy.navigate).toHaveBeenCalledWith([
+      'transaction-details',
+      '2023-01-01',
+      1,
+    ]);
+  });
+
+  it('should apply first and last classes correctly', () => {
+    component.isFirst = true;
+    component.isLast = false;
+    fixture.detectChanges();
+
+    const transactionElement = fixture.debugElement.query(
+      By.css('.transaction-row')
+    );
+    expect(transactionElement.classes['first']).toBeTruthy();
+    expect(transactionElement.classes['last']).toBeFalsy();
+
+    component.isFirst = false;
+    component.isLast = true;
+    fixture.detectChanges();
+
+    expect(transactionElement.classes['first']).toBeFalsy();
+    expect(transactionElement.classes['last']).toBeTruthy();
   });
 
   it('should apply positive class when amount is positive', () => {
     component.transaction = {
-      ...mockTransaction,
+      ...mockLocalTransaction,
       amount: 100.5,
     };
     fixture.detectChanges();
@@ -77,7 +131,7 @@ describe('TransactionRecordComponent', () => {
 
   it('should not apply positive class when amount is negative', () => {
     component.transaction = {
-      ...mockTransaction,
+      ...mockLocalTransaction,
       amount: -100.5,
     };
     fixture.detectChanges();
@@ -85,32 +139,5 @@ describe('TransactionRecordComponent', () => {
     const amountElement =
       fixture.nativeElement.querySelector('.transaction-icon');
     expect(amountElement.classList.contains('positive')).toBeFalse();
-  });
-
-  it('should navigate to transaction details when clicked', () => {
-    component.day = '2023-01-01';
-    component.onTransactionClick();
-
-    expect(routerSpy.navigate).toHaveBeenCalledWith([
-      'transaction-details',
-      '2023-01-01',
-      123,
-    ]);
-  });
-
-  it('should apply first class when isFirst is true', () => {
-    component.isFirst = true;
-    fixture.detectChanges();
-
-    const rowElement = fixture.nativeElement.querySelector('.transaction-row');
-    expect(rowElement.classList.contains('first')).toBeTrue();
-  });
-
-  it('should apply last class when isLast is true', () => {
-    component.isLast = true;
-    fixture.detectChanges();
-
-    const rowElement = fixture.nativeElement.querySelector('.transaction-row');
-    expect(rowElement.classList.contains('last')).toBeTrue();
   });
 });

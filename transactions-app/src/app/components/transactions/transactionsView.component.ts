@@ -16,28 +16,35 @@ export class TransactionsViewComponent {
   day: string | null = null;
   id: string | null = null;
 
-  transactions: { month: string; days: Day[] }[] = [];
+  transactions: { month: Date; days: Day[] }[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private transactionService: TransactionService
   ) {
-    this.transactionService.getTransactions().subscribe((transactions) => {
-      const grouped = transactions.days.reduce((acc, day) => {
-        const date = new Date(day.id);
-        const monthShort = date.toLocaleString('default', {
-          month: 'short',
-        });
+    this.transactionService.getTransactions().subscribe({
+      next: (transactions) => {
+        const grouped = transactions.days.reduce((acc, day) => {
+          const date = new Date(day.id);
+          const firstDayOfMonth = new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            1
+          ).toLocaleString('default');
 
-        acc[monthShort] = acc[monthShort] || [];
-        acc[monthShort].push(day);
-        return acc;
-      }, {} as groupedTransactions);
+          acc[firstDayOfMonth] = acc[firstDayOfMonth] || [];
+          acc[firstDayOfMonth].push(day);
+          return acc;
+        }, {} as groupedTransactions);
 
-      this.transactions = Object.entries(grouped).map(([month, days]) => ({
-        month,
-        days,
-      }));
+        this.transactions = Object.entries(grouped).map(([month, days]) => ({
+          month: new Date(month),
+          days,
+        }));
+      },
+      error: (error) => {
+        console.log('getTransactions error', error);
+      },
     });
   }
 }

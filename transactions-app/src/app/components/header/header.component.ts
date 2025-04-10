@@ -17,7 +17,6 @@ export class HeaderComponent {
 
   navItems = [
     { label: 'Transactions', route: '/transactions', icon: 'receipt' },
-    // { label: 'Details', route: '/details/2023-01-01/1', icon: 'info' },
   ];
 
   toggleMenu(): void {

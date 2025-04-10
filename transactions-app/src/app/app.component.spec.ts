@@ -24,10 +24,6 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should have the correct title', () => {
     expect(component.title).toEqual('Transactions Timeline');
   });

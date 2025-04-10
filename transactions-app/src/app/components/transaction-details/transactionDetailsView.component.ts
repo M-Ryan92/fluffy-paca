@@ -47,21 +47,26 @@ export class TransactionDetailsViewComponent implements OnInit {
 
     this.transactionService
       .getTransactionByDayAndId(this.day, this.id)
-      .subscribe((transaction) => {
-        this.transaction = transaction;
-        this.description = transaction.description;
-        this.otherPartyName = transaction.otherParty?.name || 'ATM';
-        this.otherPartyIban = transaction.otherParty?.iban;
-        this.amount = transaction.amount;
-        this.date = transaction.timestamp;
-        this.currencyCode = transaction.currencyCode;
+      .subscribe({
+        next: (transaction) => {
+          this.transaction = transaction;
+          this.description = transaction.description;
+          this.otherPartyName = transaction.otherParty?.name || 'ATM';
+          this.otherPartyIban = transaction.otherParty?.iban;
+          this.amount = transaction.amount;
+          this.date = transaction.timestamp;
+          this.currencyCode = transaction.currencyCode;
 
-        if (!isLocalTransaction(transaction)) {
-          this.currencyRate = transaction.currencyRate;
-          this.amount = transaction.amount / this.currencyRate;
-          this.originalAmount = transaction.amount;
-          this.isForeignCurrency = true;
-        }
+          if (!isLocalTransaction(transaction)) {
+            this.currencyRate = transaction.currencyRate;
+            this.amount = transaction.amount / this.currencyRate;
+            this.originalAmount = transaction.amount;
+            this.isForeignCurrency = true;
+          }
+        },
+        error: (error) => {
+          console.log('getTransactionByDayAndId error', error);
+        },
       });
   }
 }

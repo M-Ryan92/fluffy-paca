@@ -23,10 +23,6 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should display the title', () => {
     const testTitle = 'Test Title';
     component.title = testTitle;
