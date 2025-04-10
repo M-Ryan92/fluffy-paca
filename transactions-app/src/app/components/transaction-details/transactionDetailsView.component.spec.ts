@@ -7,6 +7,7 @@ import { LocalTransaction, ForeignTransaction } from '../../../shared/types';
 import { CurrencyCode } from '../../../shared/constants';
 import { CardComponent } from './card/card.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { By } from '@angular/platform-browser';
 
 describe('TransactionDetailsViewComponent', () => {
   let component: TransactionDetailsViewComponent;
@@ -79,11 +80,29 @@ describe('TransactionDetailsViewComponent', () => {
     fixture.detectChanges();
 
     expect(component.transaction).toEqual(mockLocalTransaction);
-    expect(component.description).toBe(mockLocalTransaction.description);
     expect(component.amount).toBe(mockLocalTransaction.amount);
     expect(component.isForeignCurrency).toBeFalse();
-    expect(component.otherPartyName).toBe(mockLocalTransaction.otherParty.name);
-    expect(component.otherPartyIban).toBe(mockLocalTransaction.otherParty.iban);
+
+    expect(component.otherParty?.name).toBe(
+      mockLocalTransaction.otherParty.name
+    );
+    expect(component.otherParty?.iban).toBe(
+      mockLocalTransaction.otherParty.iban
+    );
+
+    const nameElement = fixture.debugElement.query(
+      By.css('.details-info span')
+    );
+    expect(nameElement.nativeElement.textContent.trim()).toBe(
+      mockLocalTransaction.otherParty.name
+    );
+
+    const ibanElement = fixture.debugElement.queryAll(
+      By.css('.details-info span')
+    )[1];
+    expect(ibanElement.nativeElement.textContent.trim()).toBe(
+      mockLocalTransaction.otherParty.iban
+    );
   });
 
   it('should load and display foreign transaction details with currency conversion', () => {
@@ -94,14 +113,12 @@ describe('TransactionDetailsViewComponent', () => {
     fixture.detectChanges();
 
     expect(component.transaction).toEqual(mockForeignTransaction);
-    expect(component.description).toBe(mockForeignTransaction.description);
     expect(component.amount).toBe(
       mockForeignTransaction.amount / mockForeignTransaction.currencyRate
     );
     expect(component.originalAmount).toBe(mockForeignTransaction.amount);
     expect(component.isForeignCurrency).toBeTrue();
     expect(component.currencyRate).toBe(mockForeignTransaction.currencyRate);
-    expect(component.currencyCode).toBe(mockForeignTransaction.currencyCode);
   });
 
   it('should handle transaction with no other party', () => {
@@ -116,8 +133,12 @@ describe('TransactionDetailsViewComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.otherPartyName).toBe('ATM');
-    expect(component.otherPartyIban).toBeUndefined();
+    expect(component.otherParty).toBeNull();
+
+    const otherPartyCard = fixture.debugElement.query(
+      By.css('app-card[label="other party"]')
+    );
+    expect(otherPartyCard).toBeNull();
   });
 
   it('should handle error when loading transaction', () => {

@@ -22,14 +22,14 @@ export class TransactionDetailsViewComponent implements OnInit {
   day!: string;
   id!: string;
 
-  description!: string;
-  otherPartyName!: string;
-  otherPartyIban!: string | undefined;
+  otherParty: {
+    name: string;
+    iban?: string;
+  } | null = null;
+
   amount!: number;
   originalAmount!: number;
-  date!: string;
   currencyRate!: number;
-  currencyCode!: string;
   localCurrencyCode: string = CurrencyCode.EUR;
   isForeignCurrency = false;
   transaction: Transaction | null = null;
@@ -50,12 +50,8 @@ export class TransactionDetailsViewComponent implements OnInit {
       .subscribe({
         next: (transaction) => {
           this.transaction = transaction;
-          this.description = transaction.description;
-          this.otherPartyName = transaction.otherParty?.name || 'ATM';
-          this.otherPartyIban = transaction.otherParty?.iban;
+          this.otherParty = transaction.otherParty ?? null;
           this.amount = transaction.amount;
-          this.date = transaction.timestamp;
-          this.currencyCode = transaction.currencyCode;
 
           if (!isLocalTransaction(transaction)) {
             this.currencyRate = transaction.currencyRate;
